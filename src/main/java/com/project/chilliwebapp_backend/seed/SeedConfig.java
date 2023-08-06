@@ -1,4 +1,4 @@
-package com.project.chilliwebapp_backend;
+package com.project.chilliwebapp_backend.seed;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +11,7 @@ import static java.time.Month.*;
 public class SeedConfig {
 
     @Bean
-    CommandLineRunner commandLineRunner(SeedRepository repository){
+    CommandLineRunner commandLineRunnerSeed(SeedRepository repository){
         return args -> {
             Seed seed1 = new Seed(
                     "Habanero",

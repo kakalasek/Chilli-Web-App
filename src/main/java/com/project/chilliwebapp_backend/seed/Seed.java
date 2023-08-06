@@ -1,4 +1,4 @@
-package com.project.chilliwebapp_backend;
+package com.project.chilliwebapp_backend.seed;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

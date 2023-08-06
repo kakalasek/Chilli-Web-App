@@ -1,5 +1,7 @@
-package com.project.chilliwebapp_backend;
+package com.project.chilliwebapp_backend.seed;
 
+import com.project.chilliwebapp_backend.seed.Seed;
+import com.project.chilliwebapp_backend.seed.SeedRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
