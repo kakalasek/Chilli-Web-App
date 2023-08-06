@@ -14,4 +14,5 @@ public class PlantService {
     public List<Plant> allPlants(){
         return plantRepository.findAll();
     }
+
 }
