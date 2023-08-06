@@ -1,9 +1,10 @@
 package com.project.chilliwebapp_backend;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-public interface SeedRepository {
-
+@Repository
+public interface SeedRepository extends MongoRepository<Seed, ObjectId> {
 
 }

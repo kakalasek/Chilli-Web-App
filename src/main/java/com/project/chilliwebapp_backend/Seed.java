@@ -14,6 +14,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Seed {
+    @Id
+    private ObjectId id;
 
     private String type;
     private LocalDate dayOfStoring;

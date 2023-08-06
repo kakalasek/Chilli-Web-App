@@ -3,6 +3,8 @@ package com.project.chilliwebapp_backend;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
@@ -13,15 +15,22 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Plant {
 
+    @Id
+    private ObjectId id;
+
     private String type;
     private LocalDate dateOfPlanting;
     private Integer dayFromPlanting;
+
     private LocalDate dateOfFirstFruit;
     private Integer dayOfFirstFruit;
+
     private LocalDate dateOfFirstHarvestedFruit;
     private Integer dayOfFirstHarvestedFruit;
+
     private LocalDate dateOfDisposal;
     private Integer dayOfDisposal;
+
     private Integer count;
     private Integer sprouted;
     private Integer germination;
