@@ -11,20 +11,20 @@ import static java.time.Month.*;
 @Configuration
 public class PlantConfig {
 
-    @Bean
-    CommandLineRunner commandLineRunnerPlant(PlantRepository repository){
-        return args -> {
-            Plant plant1 = new Plant(
-                    "Habanero",
-                    LocalDate.of(2022, FEBRUARY, 23),
-                    LocalDate.of(2022, MAY, 12),
-                    LocalDate.of(2022, SEPTEMBER, 25),
-                    LocalDate.of(2022, NOVEMBER, 3),
-                    10,
-                    4
-            );
-
-            repository.save(plant1);
-        };
-    }
+//    @Bean
+//    CommandLineRunner commandLineRunnerPlant(PlantRepository repository){
+//        return args -> {
+//            Plant plant1 = new Plant(
+//                    "Habanero",
+//                    LocalDate.of(2022, FEBRUARY, 23),
+//                    LocalDate.of(2022, MAY, 12),
+//                    LocalDate.of(2022, SEPTEMBER, 25),
+//                    LocalDate.of(2022, NOVEMBER, 3),
+//                    10,
+//                    4
+//            );
+//
+//            repository.save(plant1);
+//        };
+//    }
 }

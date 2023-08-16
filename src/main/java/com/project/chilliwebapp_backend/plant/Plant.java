@@ -1,11 +1,14 @@
 package com.project.chilliwebapp_backend.plant;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
@@ -19,6 +22,7 @@ import java.time.temporal.ChronoUnit;
 public class Plant {
 
     @Id
+    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id;
 
     private String type;
@@ -38,15 +42,20 @@ public class Plant {
     private Integer sprouted;
     private Double germination;
 
+    public Plant(String type, LocalDate dateOfPlanting, Integer count) {
+        setType(type);
+        setDateOfPlanting(dateOfPlanting);
+        setCount(count);
+        setDateOfFirstFruit(LocalDate.now());
+        setDateOfFirstHarvestedFruit(LocalDate.now());
+        setDateOfDisposal(LocalDate.now());
+        setSprouted(0);
 
-    public Plant(String type, LocalDate dateOfPlanting, LocalDate dateOfFirstFruit, LocalDate dateOfFirstHarvestedFruit, LocalDate dateOfDisposal, Integer count, Integer sprouted) {
-        this.type = type;
-        this.dateOfPlanting = dateOfPlanting;
-        this.dateOfFirstFruit = dateOfFirstFruit;
-        this.dateOfFirstHarvestedFruit = dateOfFirstHarvestedFruit;
-        this.dateOfDisposal = dateOfDisposal;
-        this.count = count;
-        this.sprouted = sprouted;
+        setDayFromPlanting((int)dateOfPlanting.until(LocalDate.now(), ChronoUnit.DAYS));
+        setDayOfFirstFruit((int)dateOfPlanting.until(dateOfFirstFruit, ChronoUnit.DAYS));
+        setDayOfFirstHarvestedFruit((int)dateOfPlanting.until(dateOfFirstHarvestedFruit, ChronoUnit.DAYS));
+        setDayOfDisposal((int)dateOfPlanting.until(dateOfDisposal, ChronoUnit.DAYS));
+        setGermination((double) Math.round((double)sprouted/((double)count/100)));
     }
 
     public Integer getDayFromPlanting(){
@@ -66,6 +75,6 @@ public class Plant {
     }
 
     public Double getGermination(){
-        return (double)sprouted/((double)count/100);
+        return (double) Math.round((double)sprouted/((double)count/100));
     }
 }

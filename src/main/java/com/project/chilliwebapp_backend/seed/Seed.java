@@ -1,5 +1,7 @@
 package com.project.chilliwebapp_backend.seed;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,21 +19,22 @@ import java.time.Period;
 @NoArgsConstructor
 public class Seed {
     @Id
+    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id;
 
     private String type;
-    private LocalDate dayOfStoring;
+    private LocalDate dateOfStoring;
     private Integer count;
-    @Transient
     private Integer age;
 
-    public Seed(String type, LocalDate dayOfStoring, Integer count) {
-        this.type = type;
-        this.dayOfStoring = dayOfStoring;
-        this.count = count;
+    public Seed(String type, LocalDate dateOfStoring, Integer count) {
+        setType(type);
+        setDateOfStoring(dateOfStoring);
+        setCount(count);
+        setAge(Period.between(dateOfStoring, LocalDate.now()).getYears());
     }
 
     public Integer getAge(){
-        return Period.between(dayOfStoring, LocalDate.now()).getYears();
+        return Period.between(dateOfStoring, LocalDate.now()).getYears();
     }
 }
