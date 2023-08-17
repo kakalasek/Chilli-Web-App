@@ -2,6 +2,7 @@ package com.project.chilliwebapp_backend.plant;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,14 +18,14 @@ public class PlantController {
     @Autowired
     private PlantService plantService;
 
-    @GetMapping
-    public ResponseEntity<List<Plant>> getAllPlants(){
-        return new ResponseEntity<>(plantService.allPlants(), HttpStatus.OK);
+    @GetMapping("{page}")
+    public ResponseEntity<Page<Plant>> getAllPlants(@PathVariable Integer page){
+        return new ResponseEntity<>(plantService.allPlants(page), HttpStatus.OK);
     }
 
-    @GetMapping({"{byWhat}/{asc}"})
-    public ResponseEntity<List<Plant>> getAllPlantsSorted(@PathVariable String byWhat, @PathVariable Boolean asc){
-        return new ResponseEntity<>(plantService.allPlantsSorted(byWhat, asc), HttpStatus.OK);
+    @GetMapping({"{page}/{byWhat}/{asc}"})
+    public ResponseEntity<Page<Plant>> getAllPlantsSorted(@PathVariable Integer page, @PathVariable String byWhat, @PathVariable Boolean asc){
+        return new ResponseEntity<>(plantService.allPlantsSorted(page, byWhat, asc), HttpStatus.OK);
     }
 
     @PostMapping

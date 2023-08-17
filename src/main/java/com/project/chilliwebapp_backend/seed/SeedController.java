@@ -2,6 +2,7 @@ package com.project.chilliwebapp_backend.seed;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,14 +19,14 @@ public class SeedController {
     @Autowired
     private SeedService seedService;
 
-    @GetMapping
-    public ResponseEntity<List<Seed>> getAllSeeds(){
-        return new ResponseEntity<>(seedService.allSeeds(), HttpStatus.OK);
+    @GetMapping(path = "{page}")
+    public ResponseEntity<Page<Seed>> getAllSeeds(@PathVariable("page") Integer page){
+        return new ResponseEntity<>(seedService.allSeeds(page), HttpStatus.OK);
     }
 
-    @GetMapping(path = "{asc}")
-    public ResponseEntity<List<Seed>> getAllSeedsSortedByAge(@PathVariable("asc") Boolean asc){
-        return new ResponseEntity<>(seedService.allSeedsByAge(asc), HttpStatus.OK);
+    @GetMapping({"{page}/{asc}"})
+    public ResponseEntity<Page<Seed>> getAllSeedsSortedByAge(@PathVariable Integer page, @PathVariable Boolean asc){
+        return new ResponseEntity<>(seedService.allSeedsByAge(page, asc), HttpStatus.OK);
     }
 
     @PostMapping

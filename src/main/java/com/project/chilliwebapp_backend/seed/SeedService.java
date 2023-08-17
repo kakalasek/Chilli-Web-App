@@ -4,6 +4,8 @@ import com.project.chilliwebapp_backend.seed.Seed;
 import com.project.chilliwebapp_backend.seed.SeedRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -18,13 +20,15 @@ public class SeedService {
     private SeedRepository seedRepository;
 
 
-    public List<Seed> allSeeds(){
-        return seedRepository.findAll();
+    public Page<Seed> allSeeds(Integer page){
+        PageRequest pr = PageRequest.of(page, 10);
+        return seedRepository.findAll(pr);
     }
 
-    public List<Seed> allSeedsByAge(Boolean asc){
-        if(asc) return seedRepository.findAll(Sort.by(Sort.Direction.ASC, "dateOfStoring"));
-        else return seedRepository.findAll(Sort.by(Sort.Direction.DESC, "dateOfStoring"));
+    public Page<Seed> allSeedsByAge(Integer page, Boolean asc){
+        PageRequest pr = PageRequest.of(page, 10);
+        if(asc) return seedRepository.findAll(pr.withSort(Sort.Direction.ASC, "dateOfStoring"));
+        else return seedRepository.findAll(pr.withSort(Sort.Direction.DESC, "dateOfStoring"));
     }
 
     public Seed createSeed(String type, LocalDate dateOfStoring, Integer count){

@@ -2,6 +2,8 @@ package com.project.chilliwebapp_backend.plant;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +17,9 @@ public class PlantService {
     @Autowired
     private PlantRepository plantRepository;
 
-    public List<Plant> allPlants(){
-        return plantRepository.findAll();
+    public Page<Plant> allPlants(Integer page){
+        PageRequest pr = PageRequest.of(page, 10);
+        return plantRepository.findAll(pr);
     }
 
     public Plant createPlant(String type, LocalDate dateOfPlanting, Integer count){
@@ -25,9 +28,10 @@ public class PlantService {
        return plant;
     }
 
-    public List<Plant> allPlantsSorted(String byWhat, Boolean asc){
-        if(asc) return plantRepository.findAll(Sort.by(Sort.Direction.ASC, byWhat));
-        else return plantRepository.findAll(Sort.by(Sort.Direction.DESC, byWhat));
+    public Page<Plant> allPlantsSorted(Integer page, String byWhat, Boolean asc){
+        PageRequest pr = PageRequest.of(page, 10);
+        if(asc) return plantRepository.findAll(pr.withSort(Sort.Direction.ASC, byWhat));
+        else return plantRepository.findAll(pr.withSort(Sort.Direction.DESC, byWhat));
     }
 
     public void removePlant(ObjectId id) {
