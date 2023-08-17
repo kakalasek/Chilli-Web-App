@@ -22,6 +22,11 @@ public class PlantController {
         return new ResponseEntity<>(plantService.allPlants(), HttpStatus.OK);
     }
 
+    @GetMapping({"{byWhat}/{asc}"})
+    public ResponseEntity<List<Plant>> getAllPlantsSorted(@PathVariable String byWhat, @PathVariable Boolean asc){
+        return new ResponseEntity<>(plantService.allPlantsSorted(byWhat, asc), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Plant> createPlant(@RequestBody Plant plant){
         return new ResponseEntity<>(plantService.createPlant(plant.getType(), plant.getDateOfPlanting(), plant.getCount()), HttpStatus.CREATED);

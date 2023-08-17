@@ -2,6 +2,7 @@ package com.project.chilliwebapp_backend.plant;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,6 +23,11 @@ public class PlantService {
        Plant plant = plantRepository.insert(new Plant(type,dateOfPlanting,count));
 
        return plant;
+    }
+
+    public List<Plant> allPlantsSorted(String byWhat, Boolean asc){
+        if(asc) return plantRepository.findAll(Sort.by(Sort.Direction.ASC, byWhat));
+        else return plantRepository.findAll(Sort.by(Sort.Direction.DESC, byWhat));
     }
 
     public void removePlant(ObjectId id) {
