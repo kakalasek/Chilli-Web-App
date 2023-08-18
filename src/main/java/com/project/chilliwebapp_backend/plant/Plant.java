@@ -55,7 +55,7 @@ public class Plant {
         setDayOfFirstFruit((int)dateOfPlanting.until(dateOfFirstFruit, ChronoUnit.DAYS));
         setDayOfFirstHarvestedFruit((int)dateOfPlanting.until(dateOfFirstHarvestedFruit, ChronoUnit.DAYS));
         setDayOfDisposal((int)dateOfPlanting.until(dateOfDisposal, ChronoUnit.DAYS));
-        setGermination((double)sprouted/((double)count/100));
+        setGermination((double)sprouted/(((double)count/100)));
     }
 
     public Integer getDayFromPlanting(){
@@ -75,6 +75,6 @@ public class Plant {
     }
 
     public Double getGermination(){
-        return ((double)sprouted/((double)count/100));
+        return ((double)sprouted/(((double)count/100)));
     }
 }

@@ -44,6 +44,7 @@ public class PlantService {
             plant.setDateOfFirstFruit(dateOfFirstFruit);
             plant.setDateOfFirstHarvestedFruit(dateOfFirstHarvestedFruit);
             plant.setDateOfDisposal(dateOfDisposal);
+            plant.setGermination(plant.getGermination());
             return plantRepository.save(plant);
         });
     }
