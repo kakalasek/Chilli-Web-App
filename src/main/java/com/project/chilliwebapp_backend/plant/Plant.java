@@ -46,15 +46,9 @@ public class Plant {
         setType(type);
         setDateOfPlanting(dateOfPlanting);
         setCount(count);
-        setDateOfFirstFruit(LocalDate.now());
-        setDateOfFirstHarvestedFruit(LocalDate.now());
-        setDateOfDisposal(LocalDate.now());
         setSprouted(0);
 
         setDayFromPlanting((int)dateOfPlanting.until(LocalDate.now(), ChronoUnit.DAYS));
-        setDayOfFirstFruit((int)dateOfPlanting.until(dateOfFirstFruit, ChronoUnit.DAYS));
-        setDayOfFirstHarvestedFruit((int)dateOfPlanting.until(dateOfFirstHarvestedFruit, ChronoUnit.DAYS));
-        setDayOfDisposal((int)dateOfPlanting.until(dateOfDisposal, ChronoUnit.DAYS));
         setGermination((double)sprouted/(((double)count/100)));
     }
 
@@ -63,14 +57,17 @@ public class Plant {
     }
 
     public Integer getDayOfFirstFruit(){
+        if(dateOfFirstFruit == null) return null;
         return (int)dateOfPlanting.until(dateOfFirstFruit, ChronoUnit.DAYS);
     }
 
     public Integer getDayOfFirstHarvestedFruit(){
+        if(dateOfFirstHarvestedFruit == null) return null;
         return (int)dateOfPlanting.until(dateOfFirstHarvestedFruit, ChronoUnit.DAYS);
     }
 
     public Integer getDayOfDisposal(){
+        if(dateOfDisposal == null) return null ;
         return (int)dateOfPlanting.until(dateOfDisposal, ChronoUnit.DAYS);
     }
 

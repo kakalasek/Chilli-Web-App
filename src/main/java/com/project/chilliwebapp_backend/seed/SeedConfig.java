@@ -10,17 +10,17 @@ import static java.time.Month.*;
 @Configuration
 public class SeedConfig {
 
-    @Bean
-    CommandLineRunner commandLineRunnerSeed(SeedRepository repository){
-        return args -> {
-            for(int i = 0; i < 10; i++){
-                Seed seed1 = new Seed(
-                        "Habanero",
-                        LocalDate.of(2022, FEBRUARY, 7),
-                        10
-                );
-                repository.save(seed1);
-            }
-        };
-    }
+//    @Bean
+//    CommandLineRunner commandLineRunnerSeed(SeedRepository repository){
+//        return args -> {
+//            for(int i = 0; i < 10; i++){
+//                Seed seed1 = new Seed(
+//                        "Habanero",
+//                        LocalDate.of(2022, FEBRUARY, 7),
+//                        10
+//                );
+//                repository.save(seed1);
+//            }
+//        };
+//    }
 }
