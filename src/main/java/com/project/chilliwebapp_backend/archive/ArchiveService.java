@@ -15,6 +15,6 @@ public class ArchiveService {
 
     public Page<Plant> allArchivedPlants(Integer page) {
         PageRequest pr = PageRequest.of(page, 10);
-        return plantRepository.findAllByDateOfDisposalIsNull(pr);
+        return plantRepository.findAllByDateOfDisposalIsNotNull(pr);
     }
 }
