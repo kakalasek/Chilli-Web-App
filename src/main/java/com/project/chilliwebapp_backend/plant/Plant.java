@@ -48,11 +48,14 @@ public class Plant {
         setCount(count);
         setSprouted(0);
 
-        setDayFromPlanting((int)dateOfPlanting.until(LocalDate.now(), ChronoUnit.DAYS));
+        setDayFromPlanting(getDayFromPlanting());
         setGermination((double)sprouted/(((double)count/100)));
     }
 
     public Integer getDayFromPlanting(){
+        if(dateOfDisposal != null){
+            return null;
+        }
         return (int)dateOfPlanting.until(LocalDate.now(), ChronoUnit.DAYS);
     }
 

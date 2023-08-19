@@ -13,4 +13,5 @@ import java.time.LocalDate;
 @Repository
 public interface PlantRepository extends MongoRepository<Plant, ObjectId> {
     Page<Plant> findAllByDateOfDisposalIsNotNull(Pageable pageable);
+    Page<Plant> findAllByDateOfDisposalIsNull(Pageable pageable);
 }

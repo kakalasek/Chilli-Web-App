@@ -23,4 +23,9 @@ public class ArchiveController {
     public ResponseEntity<Page<Plant>> getAllArchivedPlants(@PathVariable Integer page){
         return new ResponseEntity<>(archiveService.allArchivedPlants(page), HttpStatus.OK);
     }
+
+    @GetMapping("{page}/{byWhat}/{asc}")
+    public ResponseEntity<Page<Plant>> getAllArchivedPlantsSorted(@PathVariable Integer page, @PathVariable String byWhat, @PathVariable Boolean asc){
+        return new ResponseEntity<>(archiveService.allArchivedPlantsSorted(page, byWhat, asc), HttpStatus.OK);
+    }
 }

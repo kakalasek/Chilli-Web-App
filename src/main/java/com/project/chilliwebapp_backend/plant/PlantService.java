@@ -19,7 +19,7 @@ public class PlantService {
 
     public Page<Plant> allPlants(Integer page){
         PageRequest pr = PageRequest.of(page, 10);
-        return plantRepository.findAll(pr);
+        return plantRepository.findAllByDateOfDisposalIsNull(pr);
     }
 
     public Plant createPlant(String type, LocalDate dateOfPlanting, Integer count){
@@ -30,8 +30,8 @@ public class PlantService {
 
     public Page<Plant> allPlantsSorted(Integer page, String byWhat, Boolean asc){
         PageRequest pr = PageRequest.of(page, 10);
-        if(asc) return plantRepository.findAll(pr.withSort(Sort.Direction.ASC, byWhat));
-        else return plantRepository.findAll(pr.withSort(Sort.Direction.DESC, byWhat));
+        if(asc) return plantRepository.findAllByDateOfDisposalIsNull(pr.withSort(Sort.Direction.ASC, byWhat));
+        else return plantRepository.findAllByDateOfDisposalIsNull(pr.withSort(Sort.Direction.DESC, byWhat));
     }
 
     public void removePlant(ObjectId id) {
@@ -49,6 +49,7 @@ public class PlantService {
             plant.setDayOfFirstFruit(plant.getDayOfFirstFruit());
             plant.setDayOfFirstHarvestedFruit(plant.getDayOfFirstHarvestedFruit());
             plant.setDayOfDisposal(plant.getDayOfDisposal());
+
             return plantRepository.save(plant);
         });
     }
