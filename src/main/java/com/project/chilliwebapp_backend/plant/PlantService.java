@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -51,6 +52,14 @@ public class PlantService {
             plant.setDayOfDisposal(plant.getDayOfDisposal());
 
             return plantRepository.save(plant);
+        });
+    }
+
+    @Scheduled(cron = "0 0 12 * * *")
+    public void updateDates(){
+        plantRepository.findAllByDateOfDisposalIsNull().forEach(plant -> {
+            plant.setDayFromPlanting(plant.getDayFromPlanting());
+            plantRepository.save(plant);
         });
     }
 }
