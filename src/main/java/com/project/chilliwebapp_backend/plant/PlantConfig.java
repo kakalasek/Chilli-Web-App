@@ -9,6 +9,9 @@ import java.time.LocalDate;
 import static java.time.Month.*;
 
 @Configuration
+/**
+ * For testing
+ */
 public class PlantConfig {
 
 //    @Bean

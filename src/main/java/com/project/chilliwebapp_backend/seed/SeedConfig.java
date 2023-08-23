@@ -8,6 +8,9 @@ import java.time.LocalDate;
 import static java.time.Month.*;
 
 @Configuration
+/**
+ * Just for testing
+ */
 public class SeedConfig {
 
 //    @Bean
